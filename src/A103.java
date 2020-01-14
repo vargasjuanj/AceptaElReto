@@ -27,7 +27,6 @@ List<Integer>param= new ArrayList();
         delta=recorrido/rectangulos;
         double pos = 0, alto = 0, areaCain = 0;
         for (int i = 0; i < rectangulos; i++) {
-            System.out.println("pos " + pos);
             alto = calcularAlto(pos);
             pos += delta ;
             if(alto<0)continue;
@@ -40,15 +39,19 @@ List<Integer>param= new ArrayList();
     }
 
     private double calcularAlto(double pos) { //función
-        int tam=param.size()-1;
-        return  param.get(0)*Math.pow(pos, tam)+(param.get(1)*Math.pow(pos, tam-=1))+(param.get(2)*pos)+param.get(3);
+        int tam=param.size()-1,i=0;
+        double alto=0;
+        for ( i=0; i<param.size()-1; i++){
+            alto+=param.get(i)*Math.pow(pos, tam);
+            tam-=1;
+        }
+        alto+=param.get(i);
+        return alto; //param.get(0)*Math.pow(pos, tam)+(param.get(1)*Math.pow(pos, tam-=1))+(param.get(2)*pos)+param.get(3);
     }
     
  private void reparto(double areaCain){
      String max="";
 double areaAbel = 1 - areaCain,res=0;
-        System.out.println("Abel " + areaAbel);
-        System.out.println("Cain " + areaCain);
         if (areaCain < areaAbel) {
             max = "ABEL";
             res = areaAbel - areaCain;
